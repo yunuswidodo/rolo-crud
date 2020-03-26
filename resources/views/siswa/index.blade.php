@@ -36,8 +36,8 @@
                                 <tbody>
                                     @foreach ($data_siswa as $siswa)   <!--$data_siswa mengambil dari data_siswa yang ada di route  -->
                                     <tr>
-                                      <td>{{$siswa->nama_depan}}</td>
-                                      <td>{{$siswa->nama_belakang}}</td>
+                                    <td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_depan}}</a></td> <!--href supaya item bisa diklik -->
+                                    <td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_belakang}}</a></td>
                                       <td>{{$siswa->jenis_kelamin}}</td>
                                       <td>{{$siswa->agama}}</td>
                                       <td>{{$siswa->alamat}}</td>

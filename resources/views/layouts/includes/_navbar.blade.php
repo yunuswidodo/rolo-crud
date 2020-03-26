@@ -11,7 +11,7 @@
 				<form class="navbar-form navbar-left">
 					<div class="input-group" method="GET" action="/siswa">
 						<input name="cari" type="text" value="" class="form-control" placeholder="Search dashboard...">
-						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+						<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span> <!--type button harus submit supaya berfungsi -->
 					</div>
 				</form>
 				<div id="navbar-menu">

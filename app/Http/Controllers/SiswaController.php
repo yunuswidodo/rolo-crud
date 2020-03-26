@@ -15,7 +15,10 @@ class SiswaController extends Controller
          * \Siswa = Class Siswa
          */
         if ($request->has('cari')) {
-            $data_siswa = \App\Siswa::where('nama_depan', 'LIKE', '%' . $request->cari . '%')->get();   // fungsi mencari data sesuai dengan global variabel
+            /**
+             * nama_depan adalah field yang akan dicari
+             */
+            $data_siswa = \App\Siswa::where('nama_depan', 'LIKE', '%' . $request->cari . '%')->get();   // fungsi mencari data sesuai dengan global variabel. lihat dinavbar
         } else {
             $data_siswa = \App\Siswa::all(); //mengambil dari database ke $data_siswa
         }
@@ -57,8 +60,16 @@ class SiswaController extends Controller
     // method update aksi setelah data di update
     public function update(Request $request, $id) // menangkap data dari form dengan parameter id
     {
+        //   dd($request->all());
         $siswa = \App\Siswa::find($id);
         $siswa->update($request->all());
+
+        //pengecekan apakah ada file yang diupload
+        if ($request->hasFile('avatar')) {   // cek apakah ada file dengan nama avatar
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());  //diupload kedalam folder public dan pindahkan kedalam folder image, dan disimpan namanya dengan original name
+            $siswa->avatar = $request->file('avatar')->getClientOriginalName(); // menyimpan nama kedalam database
+            $siswa->save();
+        }
         return redirect('/siswa')->with('sukses', 'Data Berhasil Diupdate');
     }
 
@@ -67,5 +78,11 @@ class SiswaController extends Controller
         $siswa = \App\Siswa::find($id);
         $siswa->delete();
         return redirect('/siswa')->with('sukses', 'Data Berhasil Dihapus');
+    }
+
+    public function profile($id)
+    {
+        $siswa = \App\Siswa::find($id); //penarikan data
+        return view('\siswa.profile', ['siswa' => $siswa]);
     }
 }

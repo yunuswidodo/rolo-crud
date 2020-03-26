@@ -17,6 +17,7 @@ class AuthController extends Controller
         // dd($request->all()); buat cek apa aja yang diketik didalam form gmail dan password
         /**
          * aut dibawah belum menggunakan aut yang ada dilaravel 
+         * email, password adalah nama field yang ada didatabase
          */
         if (Auth::attempt($request->only('email', 'password'))) {
             return redirect('/dashboards');
